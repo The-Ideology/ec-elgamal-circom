@@ -1,7 +1,7 @@
 import { AffinePoint } from "@noble/curves/abstract/curve";
 import { babyJub as CURVE } from "../utils/babyjub-noble";
 import { prv2pub, bigInt2Buffer, formatPrivKeyForBabyJub } from "../utils/tools";
-import * as assert from "assert";
+import * as assert from "node:assert";
 import * as crypto from "crypto";
 import { ExtPointType } from "@noble/curves/abstract/edwards";
 
@@ -54,7 +54,7 @@ function genRandomBabyJubValue(): bigint {
     }
 
     const privKey: PrivKey = rand % SNARK_FIELD_SIZE;
-    assert(privKey < SNARK_FIELD_SIZE);
+    assert.ok(privKey < SNARK_FIELD_SIZE);
 
     return privKey;
 }
@@ -80,7 +80,7 @@ const genRandomSalt = (): PrivKey => {
 function genPubKey(privKey: PrivKey): PubKey {
     // Check whether privKey is a field element
     privKey = BigInt(privKey.toString());
-    assert(privKey < SNARK_FIELD_SIZE);
+    assert.ok(privKey < SNARK_FIELD_SIZE);
     return prv2pub(bigInt2Buffer(privKey));
 }
 
